@@ -1,0 +1,9 @@
+c:\users\bloodskys\documents\visual studio 2015\Projects\Viewius\Viewius\bin\Debug\Viewius.exe.config
+c:\users\bloodskys\documents\visual studio 2015\Projects\Viewius\Viewius\bin\Debug\Viewius.exe
+c:\users\bloodskys\documents\visual studio 2015\Projects\Viewius\Viewius\bin\Debug\Viewius.pdb
+c:\users\bloodskys\documents\visual studio 2015\Projects\Viewius\Viewius\obj\Debug\Viewius.csprojResolveAssemblyReference.cache
+c:\users\bloodskys\documents\visual studio 2015\Projects\Viewius\Viewius\obj\Debug\Viewius.Form1.resources
+c:\users\bloodskys\documents\visual studio 2015\Projects\Viewius\Viewius\obj\Debug\Viewius.Properties.Resources.resources
+c:\users\bloodskys\documents\visual studio 2015\Projects\Viewius\Viewius\obj\Debug\Viewius.csproj.GenerateResource.Cache
+c:\users\bloodskys\documents\visual studio 2015\Projects\Viewius\Viewius\obj\Debug\Viewius.exe
+c:\users\bloodskys\documents\visual studio 2015\Projects\Viewius\Viewius\obj\Debug\Viewius.pdb
