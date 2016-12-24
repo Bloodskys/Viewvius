@@ -7,13 +7,12 @@ using System.Windows.Forms;
 
 namespace Viewvius
 {
-    class ViewviusGroupBox : ViewviusPositionableElement
+    class ViewviusFactory
     {
-        public new GroupBox Control;
-        public ViewviusGroupBox()
-            : base()
+        public static T Instantiate<T>()
+            where T : ViewviusPositionableElement, new()
         {
-            Control = new GroupBox();
+            return new T();
         }
     }
 }

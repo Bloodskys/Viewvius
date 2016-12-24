@@ -12,13 +12,10 @@ namespace Viewvius
 {
     public partial class Form1 : Form
     {
-        ViewviusGroupBox vGroupBox;
         public Form1()
         {
             InitializeComponent();
-            vGroupBox = new ViewviusGroupBox(this, "vGoupBox");
-            vGroupBox.AddRow();
-            vGroupBox[0].AddControl<ViewviusTextBox>();
+            ViewviusGroupBox groupBox = ViewviusFactory.Instantiate<ViewviusGroupBox>();
         }
     }
 }

@@ -7,3 +7,12 @@ D:\VS Projects\Viewvius\Viewius\obj\Debug\Viewvius.csprojResolveAssemblyReferenc
 D:\VS Projects\Viewvius\Viewius\obj\Debug\Viewvius.Form1.resources
 D:\VS Projects\Viewvius\Viewius\obj\Debug\Viewius.Properties.Resources.resources
 D:\VS Projects\Viewvius\Viewius\obj\Debug\Viewvius.csproj.GenerateResource.Cache
+D:\VSProjects\Viewvius\Viewius\obj\Debug\Viewvius.csprojResolveAssemblyReference.cache
+D:\VSProjects\Viewvius\Viewius\obj\Debug\Viewvius.Form1.resources
+D:\VSProjects\Viewvius\Viewius\obj\Debug\Viewvius.csproj.GenerateResource.Cache
+D:\VSProjects\Viewvius\Viewius\bin\Debug\Viewvius.exe.config
+D:\VSProjects\Viewvius\Viewius\bin\Debug\Viewvius.exe
+D:\VSProjects\Viewvius\Viewius\bin\Debug\Viewvius.pdb
+D:\VSProjects\Viewvius\Viewius\obj\Debug\Viewvius.Properties.Resources.resources
+D:\VSProjects\Viewvius\Viewius\obj\Debug\Viewvius.exe
+D:\VSProjects\Viewvius\Viewius\obj\Debug\Viewvius.pdb
