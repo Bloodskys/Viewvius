@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Viewius.Properties
+namespace Viewvius.Properties
 {
 
 

@@ -1,4 +1,4 @@
-﻿namespace Viewius
+﻿namespace Viewvius
 {
     partial class Form1
     {
