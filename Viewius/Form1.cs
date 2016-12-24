@@ -16,9 +16,9 @@ namespace Viewvius
         public Form1()
         {
             InitializeComponent();
-            vGroupBox = new ViewviusGroupBox("vGoupBox", this);
+            vGroupBox = new ViewviusGroupBox(this, "vGoupBox");
             vGroupBox.AddRow();
-            vGroupBox[0].AddControl(typeof(ViewviusTextBox));
+            vGroupBox[0].AddControl<ViewviusTextBox>();
         }
     }
 }

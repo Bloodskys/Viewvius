@@ -38,5 +38,10 @@ namespace Viewvius
         }
 
         #endregion
+
+        public static Tetrad Zero()
+        {
+            return new Tetrad();
+        }
     }
 }

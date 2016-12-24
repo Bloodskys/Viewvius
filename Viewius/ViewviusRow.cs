@@ -8,22 +8,21 @@ using System.Windows.Forms;
 
 namespace Viewvius
 {
-    public class ViewviusRow
+    public class ViewviusRow : ViewviusPositionableElement
     {
         #region Fields
 
         #region Private Fields
 
         private List<ViewviusControl> controls;
-        private int height;
-        private Tetrad margin;
-        private Tetrad padding;
+        private Point nextControlPostion;
+        private int rowOrderNum;
 
         #endregion // Private Fields
 
         #region Public Fields
 
-        public EventHandler<ViewviusRowHeightChangedEventArgs> HeightChanged;
+        public Control parentGroupBox;
 
         #endregion // Public Fields
 
@@ -31,9 +30,11 @@ namespace Viewvius
 
         #region Constructors
 
-        public ViewviusRow()
+        public ViewviusRow(int rowOrderNum)
         {
+            this.rowOrderNum = rowOrderNum;
             controls = new List<ViewviusControl>();
+            nextControlPostion = new Point(Margin.left + Padding.left, Margin.top + Padding.top);
         }
 
         #endregion // Constructors
@@ -45,15 +46,49 @@ namespace Viewvius
         /// <summary>
         /// Возвращает высоту строки в пикселях
         /// </summary>
-        public int Height
+        public new int Height
         {
             get
             {
-                return height;
+                return ControlMaxHeight + Margin.top + Margin.bottom + Padding.top + Padding.bottom;
             }
         }
 
         #endregion // Height
+
+        #region Width
+
+        /// <summary>
+        /// Возвращает высоту строки в пикселях
+        /// </summary>
+        public new int Width
+        {
+            get
+            {
+                return NextControlPostion.X;
+            }
+        }
+
+        #endregion // Width
+
+        #region ControlMaxHeight
+
+        int ControlMaxHeight
+        {
+            get
+            {
+                return ControlMaxHeight;
+            }
+            set
+            {
+                ControlMaxHeight = value;
+                ViewviusPositionableElementEventArgs args = new ViewviusPositionableElementEventArgs();
+                args.Value = Height;
+                OnHeightChanged(args);
+            }
+        }
+
+        #endregion // ControlMaxHeight
 
         #region IsEmpty
 
@@ -69,6 +104,22 @@ namespace Viewvius
         }
 
         #endregion // IsEmpty
+
+        #region NextControlPostion
+
+        public Point NextControlPostion
+        {
+            get
+            {
+                return nextControlPostion;
+            }
+            set
+            {
+                nextControlPostion = value;
+            }
+        }
+
+        #endregion // NextControlPostion
 
         #endregion // Properties
 
@@ -88,75 +139,28 @@ namespace Viewvius
 
         #region getLocationForNewControl
 
-        private Point getLocationForNewControl(Type vControlType)
+        private Point getLocationForNewControl(ViewviusControl vControl)
         {
-            Point location = new Point();
-
-            return location;
+            Point location = NextControlPostion;
+            NextControlPostion = NextControlPostion + new Size(vControl.Width, 0);
+            return NextControlPostion;
         }
 
         #endregion getLocationForNewControl
 
         #region getNewViewviusControlByType
 
-        private ViewviusControl getNewControlByType(Type vControlType)
+        private ViewviusControl getNewControlByType<vControlType>() 
+            where vControlType : ViewviusControl, new()
         {
             ViewviusControl viewviusControl = null;
-            // foreach possible factory type - try return new()
-            /*switch (controlType)
-            {
-                case ControlType.ComboBox:
-                    {
-                        viewviusControl = new ComboBox();
-                        break;
-                    }
-                case ControlType.Label:
-                    {
-                        break;
-                    }
-                case ControlType.TextBox:
-                    {
-                        break;
-                    }
-                case default:
-                    {
-                        break;
-                    }
-            }*/
+            viewviusControl = ViewviusControlFactory.Instantiate<vControlType>();
             return viewviusControl;
         }
 
         #endregion // getNewControlByType
 
-        #region heightChanged
-        
-        private void heightChanged(int newHeight)
-        {
-            ViewviusRowHeightChangedEventArgs args = new ViewviusRowHeightChangedEventArgs();
-            args.Height = newHeight;
-            OnHeightChanged(args);
-        }
-
-        #endregion // heightChanged
-
         #endregion // Private Functions
-
-        #region Protected Functions
-
-        #region OnHeightChanged
-
-        protected virtual void OnHeightChanged(ViewviusRowHeightChangedEventArgs e)
-        {
-            EventHandler<ViewviusRowHeightChangedEventArgs> handler = HeightChanged;
-            if(handler != null)
-            {
-                handler(this, e);
-            }
-        }
-
-        #endregion // OnHeightChanged
-
-        #endregion // Protected Functions
 
         #region Public Functions
 
@@ -167,31 +171,47 @@ namespace Viewvius
         /// </summary>
         /// <param name="controlType">Тип добавляемого Control</param>
         /// <param name="row">Номер линии, в которую добавляется Control, по умолчанию - в последнюю</param>
-        public void AddControl(Type vControlType)
+        public void AddControl<vControlType>() 
+            where vControlType : ViewviusControl, new()
         {
-            Point location = getLocationForNewControl(vControlType);
-            ViewviusControl vControl = getNewControlByType(vControlType);
-            controls.Add(new ViewviusControl(vControl.Control));
+            ViewviusControl vControl = getNewControlByType<vControlType>();
+            Point location = getLocationForNewControl(vControl);
+            vControl.Control.Location = location;
+            controls.Add(vControl);
+            parentGroupBox.Controls.Add(controls.Last().Control);
             controls.Last().HeightChanged += ViewviusRow_HeightChanged;
-            controls.Last().SetMargin(new Tetrad(0, 0, 0, 0));
-        }
+            controls.Last().WidthChanged += ViewviusRow_WidthChanged;
+            controls.Last().Margin = new Tetrad(10, 10, 10, 10);
 
-        private void ViewviusRow_HeightChanged(object sender, ViewviusControlHeightChangedEventArgs e)
-        {
-            MessageBox.Show("IT'S ALIVE!!");
-            if(height < e.Height)
-            {
-                height = e.Height;
-            }
         }
 
         #endregion //region AddControl
 
+        #region ViewviusRow_HeightChanged
+
+        private void ViewviusRow_HeightChanged(object sender, ViewviusPositionableElementEventArgs e)
+        {
+            MessageBox.Show("IT'S ViewviusRow_HeightChanged!!");
+            NextControlPostion = NextControlPostion + new Size(0, e.Value);
+        }
+
+        #endregion // ViewviusRow_HeightChanged
+
+        #region ViewviusRow_WidthChanged
+
+        private void ViewviusRow_WidthChanged(object sender, ViewviusPositionableElementEventArgs e)
+        {
+            MessageBox.Show("IT'S ViewviusRow_WidthChanged!!");
+            NextControlPostion = NextControlPostion + new Size(e.Value, 0);
+        }
+
+        #endregion // ViewviusRow_WidthChanged
+
         #endregion // Public Functions
     }
 
-    public class ViewviusRowHeightChangedEventArgs : EventArgs
+    public class ViewviusRowSizeEventArgs : EventArgs
     {
-        public int Height { get; set; }
+        public int Value { get; set; }
     }
 }

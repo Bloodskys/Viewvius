@@ -58,6 +58,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewviusControl.cs" />
+    <Compile Include="IViewviusPositionableElement.cs" />
+    <Compile Include="ViewviusPositionableElement.cs" />
     <Compile Include="ViewviusRow.cs" />
     <Compile Include="ViewviusTextBox.cs" />
     <EmbeddedResource Include="Form1.resx">

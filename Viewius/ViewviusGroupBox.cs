@@ -8,62 +8,25 @@ using System.Windows.Forms;
 
 namespace Viewvius
 {
-    public class ViewviusGroupBox
+    public class ViewviusGroupBox : ViewviusPositionableElement
     {
         #region Fields
 
         #region Private Fields
 
         private const int LAST_ROW = -1;
-        private static int DefaultGroupBoxHeight;
-        private int height;
         private GroupBox groupBox;
         private List<ViewviusRow> rows;
 
         #endregion // Private Fields
-
-        #region Protected Fields
-
-        protected virtual void OnHeightChanged(ViewviusGroupBoxHeightChangedEventArgs e)
-        {
-            EventHandler<ViewviusGroupBoxHeightChangedEventArgs> handler = HeightChanged;
-            if(handler != null)
-            {
-
-            }
-        }
-
-        #endregion // Protected Fields
-
-        #region Public Fields
-
-        public EventHandler<ViewviusGroupBoxHeightChangedEventArgs> HeightChanged;
-
-        #endregion // Public Fields
-
+        
         #endregion // Fields
 
         #region Constructors
 
-        public ViewviusGroupBox()
+        public ViewviusGroupBox(Control parent, string text="")
         {
             groupBox = new GroupBox();
-            height = DefaultGroupBoxHeight;
-            rows = new List<ViewviusRow>();
-        }
-
-        public ViewviusGroupBox(string text)
-        {
-            groupBox = new GroupBox();
-            height = DefaultGroupBoxHeight;
-            groupBox.Text = text;
-            rows = new List<ViewviusRow>();
-        }
-
-        public ViewviusGroupBox(string text, Control parent)
-        {
-            groupBox = new GroupBox();
-            height = DefaultGroupBoxHeight;
             parent.Controls.Add(groupBox);
             groupBox.Text = text;
             rows = new List<ViewviusRow>();
@@ -135,16 +98,36 @@ namespace Viewvius
 
         #region Height
 
-        public int Height
+        /// <summary>
+        /// Возвращает высоту строки в пикселях
+        /// </summary>
+        public new int Height
         {
             get
             {
-                return height;
+                return RowsHeight + Margin.top + Margin.bottom + Padding.top + Padding.bottom;
             }
         }
 
         #endregion // Height
 
+        #region RowsHeight
+
+        int RowsHeight
+        {
+            get
+            {
+                int height = 0;
+                foreach(ViewviusRow row in rows)
+                {
+                    height += row.Height;
+                }
+                return height;
+            }
+        }
+
+        #endregion // RowsHeight
+        
         #endregion // Properties
 
         #region Indexer
@@ -173,7 +156,8 @@ namespace Viewvius
         /// <returns>Номер строки</returns>
         public int AddRow()
         {
-            rows.Add(new ViewviusRow());
+            rows.Add(new ViewviusRow(rows.Count));
+            rows.Last().parentGroupBox = groupBox;
             return RowCount;
         }
 
@@ -181,10 +165,5 @@ namespace Viewvius
 
         #endregion // Public Functions
 
-    }
-
-    public class ViewviusGroupBoxHeightChangedEventArgs : EventArgs
-    {
-        public int Height { get; set; }
     }
 }

@@ -8,9 +8,10 @@ namespace Viewvius
 {
     class ViewviusControlFactory
     {
-        public static ViewviusControl Instantiate<T>(T t) where T : ViewviusControl
+        public static ViewviusControl Instantiate<T>() 
+            where T : ViewviusControl, new()
         {
-            return null; 
+            return new T(); 
         }
     }
 }

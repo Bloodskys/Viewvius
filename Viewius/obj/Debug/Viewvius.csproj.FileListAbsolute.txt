@@ -1,0 +1,9 @@
+D:\VS Projects\Viewvius\Viewius\bin\Debug\Viewius.exe.config
+D:\VS Projects\Viewvius\Viewius\obj\Debug\Viewius.exe
+D:\VS Projects\Viewvius\Viewius\obj\Debug\Viewius.pdb
+D:\VS Projects\Viewvius\Viewius\bin\Debug\Viewius.exe
+D:\VS Projects\Viewvius\Viewius\bin\Debug\Viewius.pdb
+D:\VS Projects\Viewvius\Viewius\obj\Debug\Viewvius.csprojResolveAssemblyReference.cache
+D:\VS Projects\Viewvius\Viewius\obj\Debug\Viewvius.Form1.resources
+D:\VS Projects\Viewvius\Viewius\obj\Debug\Viewius.Properties.Resources.resources
+D:\VS Projects\Viewvius\Viewius\obj\Debug\Viewvius.csproj.GenerateResource.Cache

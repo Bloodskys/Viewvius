@@ -7,34 +7,24 @@ using System.Windows.Forms;
 
 namespace Viewvius
 {
-    public class ViewviusControl
+    public class ViewviusControl : ViewviusPositionableElement
     {
         #region Fields
 
         #region Protected Fields
 
         protected Control control;
-        protected Tetrad margin;
-        protected Tetrad padding;
 
         #endregion // Protected Fields
-
-        #region Public Fields
-
-        public static int DefaultSize;
-        public event EventHandler<ViewviusControlHeightChangedEventArgs> HeightChanged;
-
-        #endregion // Public Fields
 
         #endregion // Fields
 
         #region Constructors
 
-        public ViewviusControl(Control control)
+        public ViewviusControl()
         {
-            margin = new Tetrad();
-            padding = new Tetrad();
-            this.control = control;
+            Margin = new Tetrad();
+            Padding = new Tetrad();
         }
 
         #endregion
@@ -49,58 +39,14 @@ namespace Viewvius
             }
         }
 
-        #endregion
-
-        #region Private Functions
-
-        #endregion // Private Functions
-
-        #region Protected Functions
-
-        #region ChangeHeight
-
-        protected void ChangeHeight(int newHeight)
+        public new int Height
         {
-            ViewviusControlHeightChangedEventArgs args = new ViewviusControlHeightChangedEventArgs();
-            args.Height = newHeight;
-            OnHeightChanged(args); 
-        }
-
-        #endregion // changeHeight
-
-        #region OnHeightChanged
-
-        protected virtual void OnHeightChanged(ViewviusControlHeightChangedEventArgs e)
-        {
-            EventHandler<ViewviusControlHeightChangedEventArgs> handler = HeightChanged;
-            if(handler != null)
+            get
             {
-                handler(this, e);
+                return control.Height + Margin.top + Margin.bottom + Padding.top + Padding.bottom;
             }
         }
 
-        #endregion // OnHeightChanged
-
-        #endregion // Protected Functions
-
-        #region Public Functions
-
-        public void SetMargin(Tetrad margin)
-        {
-            this.margin = margin;
-            int newHeight = this.margin.top + this.margin.bottom + control.Height;
-            ChangeHeight(newHeight);
-        }
-        public void SetPadding(Tetrad padding)
-        {
-            this.padding = padding;
-        }
-
         #endregion
-    }
-
-    public class ViewviusControlHeightChangedEventArgs : EventArgs
-    {
-        public int Height { get; set; }
     }
 }
