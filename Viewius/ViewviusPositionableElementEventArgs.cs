@@ -10,5 +10,6 @@ namespace Viewvius
     public class ViewviusPositionableElementEventArgs : EventArgs
     {
         public Size Size;
+        public int OrderNumber;
     }
 }

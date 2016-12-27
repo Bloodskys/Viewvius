@@ -55,11 +55,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewviusButton.cs" />
     <Compile Include="ViewviusFactory.cs" />
     <Compile Include="ViewviusGroupBox.cs" />
     <Compile Include="ViewviusPositionableElement.cs" />
     <Compile Include="ViewviusPositionableElementEventArgs.cs" />
     <Compile Include="ViewviusRow.cs" />
+    <Compile Include="ViewviusTextBox.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

@@ -16,12 +16,12 @@ namespace Viewvius
 
         #region Constructors
 
-        public Tetrad()
+        public Tetrad(int value = 0)
         {
-            this.top = 0;
-            this.right = 0;
-            this.bottom = 0;
-            this.left = 0;
+            this.top = value;
+            this.right = value;
+            this.bottom = value;
+            this.left = value;
         }
         public Tetrad(int top, int right, int bottom, int left)
         {
@@ -54,13 +54,28 @@ namespace Viewvius
             result.left = -t.left;
             return result;
         }
-        public static Size operator +(Tetrad t1, Tetrad t2)
+        public static Tetrad operator +(Tetrad t1, Tetrad t2)
         {
-            return new Size(t1.left + t1.right + t2.left + t2.right, t1.top + t1.bottom + t2.top + t2.bottom);
+            return new Tetrad(
+                  t1.top + t2.top
+                , t1.right + t2.right
+                , t1.bottom + t2.bottom
+                , t1.left + t2.left
+                );
         }
-        public static Size operator -(Tetrad t1, Tetrad t2)
+        public static Tetrad operator -(Tetrad t1, Tetrad t2)
         {
             return t1 + (-t2);
+        }
+        
+        public static implicit operator Size(Tetrad t)
+        {
+            return new Size(t.left, t.top);
+        }
+
+        public static implicit operator String(Tetrad t)
+        {
+            return ("(" + t.top + ", " + t.right + ", " + t.bottom + ", " + t.left + ")");
         }
     }
 }
